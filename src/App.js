@@ -4,22 +4,25 @@ import CharacterTable from "./Components/CharacterTable";
 
 const App = () => {
   const [characterData, setCharacterData] = useState([]);
+  const [homeworldData, setHomeWorldData] = useState([]);
   const [query, setQuery] = useState([]);
 
+  console.log(characterData);
+
   useEffect(() => {
-    getCharacterData();
+    getSwapi();
   }, [query]);
 
-  const getCharacterData = async () => {
-    const response = await fetch("https://swapi.dev/api/people/");
-    const data = await response.json();
-    setCharacterData(data.results);
-    console.log(data);
+  const getSwapi = () => {
+    axios
+      .get("https://swapi.dev/api/people/")
+      .then((response) => setCharacterData(response.data.results))
+      .catch((err) => console.error(err));
   };
   return (
     <div>
       <h1>hello world</h1>
-      <CharacterTable characterData={characterData} />
+      {/* <CharacterTable characterData={characterData} /> */}
     </div>
   );
 };
