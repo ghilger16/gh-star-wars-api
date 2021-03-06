@@ -1,6 +1,16 @@
 import React, { useState } from "react";
+import axios from "axios";
 
-const CharacterTable = ({ characterData }) => {
+const CharacterTable = ({ characterData, setPage, page }) => {
+  const [homeWorld, setHomeWorld] = useState([]);
+
+  const getHomeWorld = (homeworld) => {
+    axios
+      .get(`${homeworld}?name`)
+      .then((response) => setHomeWorld(response))
+      .catch((err) => console.error(err));
+  };
+
   const renderTableData = () => {
     return characterData.map((character) => {
       const { name, birth_year, height, mass, homeworld } = character;
@@ -10,6 +20,7 @@ const CharacterTable = ({ characterData }) => {
           <td>{birth_year}</td>
           <td>{height}</td>
           <td>{mass}</td>
+          {/* <td>{getHomeWorld(homeworld)}</td> */}
           <td>{homeworld}</td>
         </tr>
       );
@@ -20,7 +31,7 @@ const CharacterTable = ({ characterData }) => {
     <table class="table table-hover table-lg">
       <thead class="thead-light">
         <tr>
-          <th>Name</th>
+          <th onClick={(e) => setPage(page + 1)}>Name</th>
           <th>Birth Date</th>
           <th>Height</th>
           <th>Mass</th>
