@@ -4,17 +4,19 @@ import axios from "axios";
 import CharacterTable from "./Components/CharacterTable";
 import ReactPaginate from "react-paginate";
 import style from "./paginate.module.css";
+import Search from "./Components/Search";
 
 const App = () => {
   const [characterData, setCharacterData] = useState([]);
   const [planetData, setPlanetData] = useState([]);
   const [speciesData, setSpeciesData] = useState([]);
   const [page, setPage] = useState(1);
-  const [query, setQuery] = useState([]);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
-    getSwapiPage(page);
-  }, [page]);
+    if (!query) getSwapiPage(page);
+    getSearchQuery(query);
+  }, [page, query]);
 
   useEffect(() => {
     getPlanetData();
@@ -60,9 +62,17 @@ const App = () => {
     }
   };
 
+  const getSearchQuery = (query) => {
+    axios
+      .get(`https://swapi.dev/api/people/?search=${query}`)
+      .then((response) => setCharacterData(response.data.results))
+      .catch((err) => console.error(err));
+  };
+
   return (
     <div className={style.paginate}>
       <h1>hello world</h1>
+      <Search query={query} setQuery={setQuery} />
 
       <CharacterTable
         characterData={characterData}
