@@ -1,37 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const CharacterTable = ({ characterData, setPage, page }) => {
-  const [homeWorld, setHomeWorld] = useState([]);
-
+const CharacterTable = ({ characterData, planetData }) => {
   const getHomeWorld = (homeworld) => {
-    axios
-      .get(`${homeworld}?name`)
-      .then((response) => setHomeWorld(response))
-      .catch((err) => console.error(err));
+    return planetData.map((planet) => {
+      if (homeworld === planet.url) {
+        return planet.name;
+      }
+    });
   };
 
   const renderTableData = () => {
     return characterData.map((character) => {
       const { name, birth_year, height, mass, homeworld } = character;
+
       return (
-        <tr>
+        <tr key={name}>
           <td>{name}</td>
           <td>{birth_year}</td>
           <td>{height}</td>
           <td>{mass}</td>
-          {/* <td>{getHomeWorld(homeworld)}</td> */}
-          <td>{homeworld}</td>
+          <td>{getHomeWorld(homeworld)}</td>
         </tr>
       );
     });
   };
 
   return (
-    <table class="table table-hover table-lg">
-      <thead class="thead-light">
+    <table className="table table-hover table-lg">
+      <thead className="thead-light">
         <tr>
-          <th onClick={(e) => setPage(page + 1)}>Name</th>
+          <th>Name</th>
           <th>Birth Date</th>
           <th>Height</th>
           <th>Mass</th>
