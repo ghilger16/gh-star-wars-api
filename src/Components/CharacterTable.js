@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const CharacterTable = ({ characterData, planetData }) => {
+const CharacterTable = ({ characterData, planetData, speciesData }) => {
   const getHomeWorld = (homeworld) => {
     return planetData.map((planet) => {
       if (homeworld === planet.url) {
@@ -10,9 +10,19 @@ const CharacterTable = ({ characterData, planetData }) => {
     });
   };
 
+  const getSpeciesData = (url) => {
+    return speciesData.map((species) => {
+      return species.people.map((person) => {
+        if (person === url) {
+          return species.name;
+        }
+      });
+    });
+  };
+
   const renderTableData = () => {
     return characterData.map((character) => {
-      const { name, birth_year, height, mass, homeworld } = character;
+      const { name, birth_year, height, mass, homeworld, url } = character;
 
       return (
         <tr key={name}>
@@ -21,6 +31,7 @@ const CharacterTable = ({ characterData, planetData }) => {
           <td>{height}</td>
           <td>{mass}</td>
           <td>{getHomeWorld(homeworld)}</td>
+          <td>{getSpeciesData(url)}</td>
         </tr>
       );
     });
@@ -35,6 +46,7 @@ const CharacterTable = ({ characterData, planetData }) => {
           <th>Height</th>
           <th>Mass</th>
           <th>HomeWorld</th>
+          <th>Species</th>
         </tr>
       </thead>
       <tbody>{renderTableData()}</tbody>

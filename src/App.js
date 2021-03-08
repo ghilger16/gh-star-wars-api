@@ -8,6 +8,7 @@ import style from "./paginate.module.css";
 const App = () => {
   const [characterData, setCharacterData] = useState([]);
   const [planetData, setPlanetData] = useState([]);
+  const [speciesData, setSpeciesData] = useState([]);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState([]);
 
@@ -17,6 +18,7 @@ const App = () => {
 
   useEffect(() => {
     getPlanetData();
+    getSpeciesData();
   }, []);
 
   const getSwapiPage = (page) => {
@@ -42,11 +44,31 @@ const App = () => {
     }
   };
 
+  const getSpeciesData = () => {
+    const processedResponses = [];
+
+    for (let i = 1; i < 5; i++) {
+      axios
+        .get(`http://swapi.dev/api/species/?page=${i}`)
+        .then((response) => {
+          response.data.results.map((response) => {
+            processedResponses.push(response);
+          });
+          setSpeciesData(processedResponses);
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+
   return (
     <div className={style.paginate}>
       <h1>hello world</h1>
 
-      <CharacterTable characterData={characterData} planetData={planetData} />
+      <CharacterTable
+        characterData={characterData}
+        planetData={planetData}
+        speciesData={speciesData}
+      />
       <ReactPaginate
         previousLabel="Previous"
         nextLabel="Next"
