@@ -7,19 +7,17 @@ const CharacterTable = ({ characterData, planetData, speciesData }) => {
     });
   };
 
-  const getSpeciesData = (url) => {
-    return speciesData.map((species) => {
-      return species.people.map((person) => {
-        if (url === person) {
-          return species.name;
-        }
-      });
+  const getSpeciesData = (species) => {
+    return speciesData.map((speciesData) => {
+      if (species === speciesData.url) {
+        return speciesData.name;
+      }
     });
   };
 
   const renderTableData = () => {
     return characterData.map((character) => {
-      const { name, birth_year, height, mass, homeworld, url } = character;
+      const { name, birth_year, height, mass, homeworld, species } = character;
 
       return (
         <tr key={name}>
@@ -28,7 +26,11 @@ const CharacterTable = ({ characterData, planetData, speciesData }) => {
           <td>{height}</td>
           <td>{mass}</td>
           <td>{getHomeWorld(homeworld)}</td>
-          <td>{getSpeciesData(url)}</td>
+          {species[0] ? (
+            <td>{getSpeciesData(species.toString(species))}</td>
+          ) : (
+            <td>Human</td>
+          )}
         </tr>
       );
     });
