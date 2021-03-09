@@ -27,10 +27,7 @@ const App = () => {
   const getSwapiPage = (page) => {
     axios
       .get(`https://swapi.dev/api/people/?page=${page}`)
-      .then(
-        (response) => setCharacterData(response.data.results),
-        setLoading(false)
-      )
+      .then((response) => setCharacterData(response.data.results))
       .catch((err) => console.error(err));
   };
 
@@ -39,12 +36,13 @@ const App = () => {
 
     for (let i = 1; i < 7; i++) {
       axios
-        .get(`http://swapi.dev/api/planets/?page=${i}`)
+        .get(`https://swapi.dev/api/planets/?page=${i}`)
         .then((response) => {
           response.data.results.map((response) => {
             processedResponses.push(response);
           });
           setPlanetData(processedResponses);
+          setLoading(false);
         })
         .catch((err) => console.error(err));
     }
@@ -55,7 +53,7 @@ const App = () => {
 
     for (let i = 1; i < 5; i++) {
       axios
-        .get(`http://swapi.dev/api/species/?page=${i}`)
+        .get(`https://swapi.dev/api/species/?page=${i}`)
         .then((response) => {
           response.data.results.map((response) => {
             processedResponses.push(response);

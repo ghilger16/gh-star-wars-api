@@ -21,7 +21,7 @@ const SearchBar = ({ setCharacterData }) => {
       <input
         type="search"
         class="form-control rounded"
-        placeholder="Search"
+        placeholder="Search Characters"
         required
         aria-label="Search"
         aria-describedby="search-addon"
