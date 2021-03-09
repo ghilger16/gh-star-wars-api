@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import CharacterTable from "./Components/CharacterTable";
 import ReactPaginate from "react-paginate";
-import style from "./paginate.module.css";
-import Search from "./Components/Search";
+import { BeatLoader } from "react-spinners";
+
+import SearchBar from "./Components/SearchBar";
 
 const App = () => {
   const [characterData, setCharacterData] = useState([]);
   const [planetData, setPlanetData] = useState([]);
   const [speciesData, setSpeciesData] = useState([]);
   const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
 
   useEffect(() => {
-    if (!query) getSwapiPage(page);
-    getSearchQuery(query);
-  }, [page, query]);
+    getSwapiPage(page);
+  }, [page]);
 
   useEffect(() => {
     getPlanetData();
@@ -62,17 +62,11 @@ const App = () => {
     }
   };
 
-  const getSearchQuery = (query) => {
-    axios
-      .get(`https://swapi.dev/api/people/?search=${query}`)
-      .then((response) => setCharacterData(response.data.results))
-      .catch((err) => console.error(err));
-  };
-
   return (
-    <div className={style.paginate}>
-      <h1>hello world</h1>
-      <Search query={query} setQuery={setQuery} />
+    <div class="p-5 text-center bg-light">
+      <h1 class="mb-3">Star Wars</h1>
+
+      <SearchBar class="mb-3" setCharacterData={setCharacterData} />
 
       <CharacterTable
         characterData={characterData}
@@ -80,14 +74,16 @@ const App = () => {
         speciesData={speciesData}
       />
       <ReactPaginate
-        previousLabel="Previous"
-        nextLabel="Next"
         pageCount="9"
         onPageChange={({ selected }) => {
           setPage(selected + 1);
         }}
         containerClassName={"paginationBttns"}
+        previousLinkClassName={"previousBttn"}
+        nextLinkClassName={"nextBttn"}
+        activeClassName={"paginationActive"}
       />
+      <BeatLoader loading />
     </div>
   );
 };
