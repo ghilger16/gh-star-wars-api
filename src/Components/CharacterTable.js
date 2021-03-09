@@ -13,7 +13,7 @@ const CharacterTable = ({ characterData, planetData, speciesData }) => {
   const getSpeciesData = (url) => {
     return speciesData.map((species) => {
       return species.people.map((person) => {
-        if (person === url) {
+        if (url === person) {
           return species.name;
         }
       });

@@ -17,18 +17,19 @@ const SearchBar = ({ setCharacterData }) => {
   };
 
   return (
-    <form class="input-group" onSubmit={handleSubmit}>
+    <form class="input-group m-4" onSubmit={handleSubmit}>
       <input
         type="search"
         class="form-control rounded"
         placeholder="Search"
+        required
         aria-label="Search"
         aria-describedby="search-addon"
         onChange={(e) => setQuery(e.target.value)}
       />
       <button
         type="button"
-        class="btn btn-outline-primary"
+        class="btn btn-outline-primary ml-2"
         onClick={handleSubmit}
       >
         Search

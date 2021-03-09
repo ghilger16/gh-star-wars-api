@@ -13,6 +13,7 @@ const App = () => {
   const [planetData, setPlanetData] = useState([]);
   const [speciesData, setSpeciesData] = useState([]);
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getSwapiPage(page);
@@ -26,7 +27,10 @@ const App = () => {
   const getSwapiPage = (page) => {
     axios
       .get(`https://swapi.dev/api/people/?page=${page}`)
-      .then((response) => setCharacterData(response.data.results))
+      .then(
+        (response) => setCharacterData(response.data.results),
+        setLoading(false)
+      )
       .catch((err) => console.error(err));
   };
 
@@ -66,13 +70,18 @@ const App = () => {
     <div class="p-5 text-center bg-light">
       <h1 class="mb-3">Star Wars</h1>
 
-      <SearchBar class="mb-3" setCharacterData={setCharacterData} />
+      <SearchBar setCharacterData={setCharacterData} />
 
-      <CharacterTable
-        characterData={characterData}
-        planetData={planetData}
-        speciesData={speciesData}
-      />
+      {loading === false ? (
+        <CharacterTable
+          characterData={characterData}
+          planetData={planetData}
+          speciesData={speciesData}
+        />
+      ) : (
+        <BeatLoader />
+      )}
+
       <ReactPaginate
         pageCount="9"
         onPageChange={({ selected }) => {
@@ -83,7 +92,6 @@ const App = () => {
         nextLinkClassName={"nextBttn"}
         activeClassName={"paginationActive"}
       />
-      <BeatLoader loading />
     </div>
   );
 };
