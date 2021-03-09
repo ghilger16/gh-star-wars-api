@@ -1,6 +1,3 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-
 const CharacterTable = ({ characterData, planetData, speciesData }) => {
   const getHomeWorld = (homeworld) => {
     return planetData.map((planet) => {
