@@ -51,11 +51,11 @@ const App = () => {
   };
 
   const handlePageClick = (pageNumber) => {
-    getCharacters(`http://swapi.dev/api/people/?page=${pageNumber}`);
+    getCharacters(`https://swapi.dev/api/people/?page=${pageNumber}`);
   };
 
   const handleSearch = (query) => {
-    getCharacters(`http://swapi.dev/api/people/?search=${query}`);
+    getCharacters(`https://swapi.dev/api/people/?search=${query}`);
   };
 
   return (
