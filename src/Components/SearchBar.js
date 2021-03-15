@@ -1,19 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const SearchBar = ({ setCharacterData }) => {
-  const [query, setQuery] = useState("");
-
-  const getSearchQuery = (query) => {
-    axios
-      .get(`https://swapi.dev/api/people/?search=${query}`)
-      .then((response) => setCharacterData(response.data.results))
-      .catch((err) => console.error(err));
-  };
-
+const SearchBar = ({ setQuery }) => {
+  const [userInput, setUserInput] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    getSearchQuery(query);
+    setQuery(userInput);
   };
 
   return (
@@ -25,7 +17,7 @@ const SearchBar = ({ setCharacterData }) => {
         required
         aria-label="Search"
         aria-describedby="search-addon"
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => setUserInput(e.target.value)}
       />
       <button
         type="button"

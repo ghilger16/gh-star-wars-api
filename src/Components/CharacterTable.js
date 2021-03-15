@@ -1,40 +1,14 @@
-const CharacterTable = ({ characterData, planetData, speciesData }) => {
-  const getHomeWorld = (homeworld) => {
-    return planetData.map((planet) => {
-      if (homeworld === planet.url) {
-        return planet.name;
-      }
-    });
-  };
-
-  const getSpeciesData = (species) => {
-    return speciesData.map((speciesData) => {
-      if (species === speciesData.url) {
-        return speciesData.name;
-      }
-    });
-  };
-
-  const renderTableData = () => {
-    return characterData.map((character) => {
-      const { name, birth_year, height, mass, homeworld, species } = character;
-
-      return (
-        <tr key={name}>
-          <td>{name}</td>
-          <td>{birth_year}</td>
-          <td>{height}</td>
-          <td>{mass}</td>
-          <td>{getHomeWorld(homeworld)}</td>
-          {species[0] ? (
-            <td>{getSpeciesData(species.toString(species))}</td>
-          ) : (
-            <td>Human</td>
-          )}
-        </tr>
-      );
-    });
-  };
+const CharacterTable = ({ characters }) => {
+  const tableData = characters.map((character) => (
+    <tr key={character.name}>
+      <td>{character.name}</td>
+      <td>{character.birth_year}</td>
+      <td>{character.height}</td>
+      <td>{character.mass}</td>
+      <td>{character.homeworld}</td>
+      <td>{character.species}</td>
+    </tr>
+  ));
 
   return (
     <table className="table table-hover table-lg">
@@ -48,7 +22,7 @@ const CharacterTable = ({ characterData, planetData, speciesData }) => {
           <th>Species</th>
         </tr>
       </thead>
-      <tbody>{renderTableData()}</tbody>
+      <tbody>{tableData}</tbody>
     </table>
   );
 };
