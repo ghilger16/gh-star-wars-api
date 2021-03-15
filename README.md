@@ -2,7 +2,7 @@
 
 A Star Wars database written in Javascript, HTML and CSS - uses React with Bootrap 
 
-Try it [here](https://gh-expense-tracker.herokuapp.com)
+Try it [here](https://gh-star-wars-api.herokuapp.com/)
 
 ![](Images/preview.png)
 
