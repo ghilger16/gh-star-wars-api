@@ -14,7 +14,7 @@ const App = () => {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    getCharacters("https://swapi.dev/api/people");
+    getCharacters("https://swapi.dev/api/people/");
   }, []);
 
   useEffect(() => {
