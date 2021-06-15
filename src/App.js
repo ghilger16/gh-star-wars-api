@@ -5,7 +5,7 @@ import axios from "axios";
 import CharacterTable from "./Components/CharacterTable";
 import ReactPaginate from "react-paginate";
 import { BeatLoader } from "react-spinners";
-import background from "./Images/starwars6.jpeg";
+import background from "./Images/starwars.jpeg";
 
 import SearchBar from "./Components/SearchBar";
 import { isBlock } from "typescript";
