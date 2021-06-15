@@ -5,8 +5,10 @@ import axios from "axios";
 import CharacterTable from "./Components/CharacterTable";
 import ReactPaginate from "react-paginate";
 import { BeatLoader } from "react-spinners";
+import background from "./Images/starwars6.jpeg";
 
 import SearchBar from "./Components/SearchBar";
+import { isBlock } from "typescript";
 
 const App = () => {
   const [characters, setCharacters] = useState([]);
@@ -59,12 +61,21 @@ const App = () => {
   };
 
   return (
-    <div class="p-5 text-center bg-light">
-      <h1 class="mb-3">Star Wars</h1>
+    <div
+      class="p-5 text-center"
+      style={{ backgroundImage: `url(${background})` }}
+    >
+      <h1 class="mb-3 text-warning">Star Wars</h1>
 
       <SearchBar setQuery={setQuery} />
 
-      {!loading ? <CharacterTable characters={characters} /> : <BeatLoader />}
+      {!loading ? (
+        <CharacterTable characters={characters} />
+      ) : (
+        <div class="mb-5">
+          <BeatLoader color="white" size="25" />
+        </div>
+      )}
 
       <ReactPaginate
         pageCount="9"

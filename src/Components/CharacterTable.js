@@ -11,9 +11,9 @@ const CharacterTable = ({ characters }) => {
   ));
 
   return (
-    <table className="table table-hover table-lg">
-      <thead className="thead-light">
-        <tr>
+    <table class="table table-hover table-lg text-warning">
+      <thead class="thead">
+        <tr class="text-warning">
           <th>Name</th>
           <th>Birth Date</th>
           <th>Height</th>

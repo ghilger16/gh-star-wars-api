@@ -12,7 +12,7 @@ const SearchBar = ({ setQuery }) => {
     <form class="input-group m-4" onSubmit={handleSubmit}>
       <input
         type="search"
-        class="form-control rounded"
+        class="form-control rounded bg-dark text-light"
         placeholder="Search Characters"
         required
         aria-label="Search"
