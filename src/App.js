@@ -8,7 +8,6 @@ import { BeatLoader } from "react-spinners";
 import background from "./Images/starwars.jpeg";
 
 import SearchBar from "./Components/SearchBar";
-import { isBlock } from "typescript";
 
 const App = () => {
   const [characters, setCharacters] = useState([]);
@@ -61,33 +60,33 @@ const App = () => {
   };
 
   return (
-    <div
-      class="p-5 text-center"
-      style={{ backgroundImage: `url(${background})` }}
-    >
-      <h1 class="mb-3 text-warning">Star Wars</h1>
+    <body style={{ backgroundImage: `url(${background})` }}>
+      <div className="container">
+        <h1 class="mb-3 pt-5 text-warning text-center">Star Wars</h1>
 
-      <SearchBar setQuery={setQuery} />
+        <SearchBar setQuery={setQuery} />
 
-      {!loading ? (
-        <CharacterTable characters={characters} />
-      ) : (
-        <div class="mb-5">
-          <BeatLoader color="white" size="25" />
+        {!loading ? (
+          <CharacterTable characters={characters} />
+        ) : (
+          <div class="mb-5 mt-5 text-center">
+            <BeatLoader color="white" size="25" />
+          </div>
+        )}
+        <div class="mt-5">
+          <ReactPaginate
+            pageCount="9"
+            onPageChange={({ selected }) => {
+              handlePageClick(selected + 1);
+            }}
+            containerClassName={"paginationBttns"}
+            previousLinkClassName={"previousBttn"}
+            nextLinkClassName={"nextBttn"}
+            activeClassName={"paginationActive"}
+          />{" "}
         </div>
-      )}
-
-      <ReactPaginate
-        pageCount="9"
-        onPageChange={({ selected }) => {
-          handlePageClick(selected + 1);
-        }}
-        containerClassName={"paginationBttns"}
-        previousLinkClassName={"previousBttn"}
-        nextLinkClassName={"nextBttn"}
-        activeClassName={"paginationActive"}
-      />
-    </div>
+      </div>
+    </body>
   );
 };
 

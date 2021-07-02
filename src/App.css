@@ -15,11 +15,14 @@
   cursor: pointer;
 }
 
-paginationBttns a:hover,
 .paginationActive a {
   background-color: grey;
 }
 
 .table {
   color: #ffe81f;
+}
+
+.container {
+  height: 100vh;
 }

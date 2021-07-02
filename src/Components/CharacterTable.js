@@ -1,3 +1,5 @@
+import { BeatLoader } from "react-spinners";
+
 const CharacterTable = ({ characters }) => {
   const tableData = characters.map((character) => (
     <tr key={character.name}>
