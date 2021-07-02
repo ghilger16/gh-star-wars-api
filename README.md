@@ -1,6 +1,6 @@
 ## Star Wars API
 
-A Star Wars database written in Javascript, HTML and CSS - uses React with Bootrap 
+A Star Wars database written in Javascript, HTML and CSS - uses React with Bootstrap 
 
 Try it [here](https://gh-star-wars-api.herokuapp.com/)
 
@@ -15,4 +15,4 @@ i am thrilled with the results and with the degree of complexity my projects are
 
 #### Author
 
-Greg Hilger - Full-Stack Software Developer 
+Greg Hilger - Full Stack Software Developer  [Website](https://www.gregoryhilger.com) | [LinkedIn](https://www.linkedin.com/in/gregoryhilger/)
